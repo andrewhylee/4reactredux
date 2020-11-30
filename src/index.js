@@ -3,6 +3,50 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from 'redux';
+
+//let store = createStore(reducer)
+
+
+//STORE -> Gloabalized State
+
+//ACTION Increment [Describes what you wanna do]
+//-----Just a function that returns an object
+const increment = () => {
+  return {
+    // type is basically just the name of the action
+    type: 'INCREMENT',
+  }
+}
+const decrement = () => {
+  return {
+    type: 'DECREMENT',
+  }
+}
+
+
+//REDUCER: How your actions changes the store [Checks which action you did and modifies the store accordingly]
+
+const counter = (state = 0, action) => {
+  switch(action.type){
+    case "INCREMENT":
+      return state+1;
+    case "DECREMENT":
+      return state-1;
+  }
+}
+
+let store = createStore(counter); //counter is the reducer
+
+//Display it in the console
+store.subscribe(() => console.log(store.getState() ));
+
+
+//DISPATCH: Sends the action to reducer so it can know what to do and then change the store. [How we can actually execute the action]
+
+
+
+
 
 ReactDOM.render(
   <React.StrictMode>
